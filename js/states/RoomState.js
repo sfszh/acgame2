@@ -88,13 +88,15 @@ ProceduralGeneration.RoomState.prototype.create = function () {
     //this.popup.cameraOffset.x = 1200;
 
 };
-/*
-ProceduralGeneration.RoomState.prototype.close_ui = function(ui) {
-    ui.cameraOffsetx= 1200;
+
+ProceduralGeneration.RoomState.prototype.close_ui = function (ui) {
+    ui.cameraOffset.x = 1200;
 };
-*/
-ProceduralGeneration.RoomState.prototype.open_ui = function () {
-    this.popup.cameraOffset.x = 0;
+
+ProceduralGeneration.RoomState.prototype.open_battle_ui = function (enemy) {
+    console.log("open")
+    this.enemy = enemy;
+    this.popup.cameraOffset.x = 300;
 };
 
 ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
@@ -103,23 +105,32 @@ ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
     popup.alpha = 0.8;
     popup.fixedToCamera = true;
     popup.anchor.set(0.5);
+    //console.log("aaaa" + this.popup.cameraOffset.x);
     this.buttonLose = this.add.button(-200, 0,  'lose_image', function () {
         console.log("lose");
-        this.popup.cameraOffset.x = 1200;
-        //this.close_ui(this.popup);
+        //this.popup.cameraOffset.x = 1200;
+        this.close_ui(this.popup);
+        this.hero.position.x = 300;
+        this.hero.position.y = 300;
+        
     },this);
     this.buttonWin = this.add.button(180, 0,  'win_image', function () {
         console.log("win");
-        this.popup.cameraOffset.x = 1200;
-        //this.close_ui(this.popup);
+        this.enemy.kill();
+        //this.popup.cameraOffset.x = 1200;
+        this.close_ui(this.popup);
     },this);
     popup.addChild(this.buttonLose);
     popup.addChild(this.buttonWin);
     this.buttonLose.bringToTop();
     this.buttonWin.bringToTop();
+    this.close_ui(this.popup);
+    //this.popup.cameraOffset.x +=1200;
 };
 
+ProceduralGeneration.RoomState.prototype.create_quest_ui = function () {
 
+}
 
 
 ProceduralGeneration.RoomState.prototype.create_object = function (object) {

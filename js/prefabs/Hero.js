@@ -2,6 +2,9 @@ var ProceduralGeneration = ProceduralGeneration || {};
 
 ProceduralGeneration.Hero = function (game_state, name, position, properties) {
     "use strict";
+    //var err = new Error();
+
+    //console.log(err.stack);
     ProceduralGeneration.Prefab.call(this, game_state, name, position, properties);
     
     this.anchor.setTo(0.5);
@@ -14,6 +17,7 @@ ProceduralGeneration.Hero = function (game_state, name, position, properties) {
     this.animations.add("walking", [0, 1], 6, true);
     
     this.cursors = this.game_state.game.input.keyboard.createCursorKeys();
+    this.game_state.hero = this;
 };
 
 ProceduralGeneration.Hero.prototype = Object.create(ProceduralGeneration.Prefab.prototype);

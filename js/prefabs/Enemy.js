@@ -19,6 +19,6 @@ ProceduralGeneration.Enemy.prototype.update = function () {
 };
 
 ProceduralGeneration.Enemy.prototype.mykill = function() {
-	this.game_state.open_ui();
-	this.kill;
+	this.game_state.open_battle_ui(this);
+	//this.kill;
 }
