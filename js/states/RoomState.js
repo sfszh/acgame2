@@ -84,9 +84,15 @@ ProceduralGeneration.RoomState.prototype.create = function () {
     }, this);
 
     this.create_battle_ui();
-
-    //this.popup.cameraOffset.x = 1200;
-
+    this.create_quest_header(game.quests[0]);
+    //quest button to open a quest info page
+    this.create_quest_ui("test");
+    this.quest_button = this.add.button(game.world.centerX +200, game.world.centerY-300,  'quest_image', function () {
+        this.open_quest_ui(game.quests[1]);
+    },this);
+    this.quest_button.scale.x =2.0;
+    this.quest_button.scale.y =2.0;
+    this.is_new_room = true;
 };
 
 ProceduralGeneration.RoomState.prototype.close_ui = function (ui) {
@@ -128,10 +134,46 @@ ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
     //this.popup.cameraOffset.x +=1200;
 };
 
-ProceduralGeneration.RoomState.prototype.create_quest_ui = function () {
 
+ProceduralGeneration.RoomState.prototype.create_quest_header = function (text) {
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    //  The Text is positioned at 0, 100
+    this.quest_text = game.add.text(10, 0, text, style);
 }
 
+
+ProceduralGeneration.RoomState.prototype.open_quest_ui = function (text) {
+    this.questUI.cameraOffset.x = 300;
+    this.questsInfo.setText(text);
+}
+
+ProceduralGeneration.RoomState.prototype.create_quest_ui = function (text) {
+    this.questUI = game.add.sprite(game.world.centerX, game.world.centerY, 'background_image');
+    this.questUI.fixedToCamera = true;
+    this.questUI.anchor.set(0.5);
+    this.questUI.alpha = 0.5;
+    var buttonLose = this.add.button(-200, 0,  'lose_image', function () {
+        this.close_ui(this.questUI);
+    },this);
+    var buttonWin = this.add.button(180, 0,  'win_image', function () {
+        this.close_ui(this.questUI);
+        if (this.is_new_room) {
+            game.connect.ws.send('finish');
+            this.is_new_room = false;
+        } else {
+            window.alert("you are still in the same room");
+        }
+    },this);
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    //  The Text is positioned at 0, 100
+    this.questsInfo = game.add.text(0,-100, text, style);
+    this.questUI.addChild(buttonWin);
+    this.questUI.addChild(buttonLose);
+    this.questUI.addChild(this.questsInfo);
+    this.close_ui(this.questUI);
+}
 
 ProceduralGeneration.RoomState.prototype.create_object = function (object) {
     "use strict";

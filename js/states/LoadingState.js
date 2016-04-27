@@ -40,6 +40,7 @@ ProceduralGeneration.LoadingState.prototype.preload = function () {
     this.load.image('background_image','assets/images/background_intro.png');
     this.load.image('win_image','assets/images/win.png');
     this.load.image('lose_image','assets/images/lose.png');
+    this.load.image('quest_image', 'assets/images/quest-button.png');
 };
 
 ProceduralGeneration.LoadingState.prototype.create = function () {
