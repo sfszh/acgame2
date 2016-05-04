@@ -13,6 +13,7 @@ ProceduralGeneration.BootState.prototype.init = function (level_file, next_state
     this.level_file = level_file;
     this.next_state = next_state;
     this.extra_parameters = extra_parameters;
+
 };
 
 ProceduralGeneration.BootState.prototype.preload = function () {

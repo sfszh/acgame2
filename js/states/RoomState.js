@@ -116,6 +116,7 @@ ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
         console.log("lose");
         //this.popup.cameraOffset.x = 1200;
         this.close_ui(this.popup);
+        game.connect.ws.send('lose');
         this.hero.position.x = 300;
         this.hero.position.y = 300;
         
@@ -123,6 +124,9 @@ ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
     this.buttonWin = this.add.button(180, 0,  'win_image', function () {
         console.log("win");
         this.enemy.kill();
+        if (this.groups.enemies.countLiving() === 0) {
+            game.connect.ws.send("win");
+        }
         //this.popup.cameraOffset.x = 1200;
         this.close_ui(this.popup);
     },this);
@@ -139,6 +143,7 @@ ProceduralGeneration.RoomState.prototype.create_quest_header = function (text) {
     var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
 
     //  The Text is positioned at 0, 100
+
     this.quest_text = game.add.text(10, 0, text, style);
 }
 
@@ -155,15 +160,16 @@ ProceduralGeneration.RoomState.prototype.create_quest_ui = function (text) {
     this.questUI.alpha = 0.5;
     var buttonLose = this.add.button(-200, 0,  'lose_image', function () {
         this.close_ui(this.questUI);
+        game.connect.ws.send("lose")
     },this);
     var buttonWin = this.add.button(180, 0,  'win_image', function () {
         this.close_ui(this.questUI);
-        if (this.is_new_room) {
-            game.connect.ws.send('finish');
+        //if (this.is_new_room) {
+            game.connect.ws.send('win');
             this.is_new_room = false;
-        } else {
-            window.alert("you are still in the same room");
-        }
+       // } else {
+         //   window.alert("you are still in the same room");
+       // }
     },this);
     var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
 
@@ -187,3 +193,8 @@ ProceduralGeneration.RoomState.prototype.create_object = function (object) {
     }
     this.prefabs[object.name] = prefab;
 };
+
+ProceduralGeneration.RoomState.prototype.update = function () {
+    this.quest_text.setText(game.quests[0] + '\n' + game.quests[1]);
+    //this.create_quest_header(game.quests[0] + '\n' + game.quests[1]);
+}

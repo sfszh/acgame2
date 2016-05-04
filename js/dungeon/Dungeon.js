@@ -52,7 +52,7 @@ ProceduralGeneration.Dungeon.prototype.generate_dungeon = function (number_of_ro
             final_room_coordinate.y = room.coordinate.row;
         }
     }, this);
-    
+    game.created_rooms = created_rooms;
     this.grid[final_room_coordinate.y][final_room_coordinate.x].populate_prefabs(1, [{prefab: "exit", properties: {texture: "exit_image", group: "exits"}}]);
 
     return this.grid[initial_room_coordinate.y][initial_room_coordinate.x];

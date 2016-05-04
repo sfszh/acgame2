@@ -14,27 +14,7 @@ ProceduralGeneration.DungeonState.prototype.init = function (number_of_rooms) {
     "use strict";
     this.number_of_rooms = number_of_rooms;
     this.dungeon = this.dungeon || new ProceduralGeneration.Dungeon(this);
-    game.connect = {};
-    game.connect.ws = new WebSocket('ws://192.168.10.233:8001/ws');
-    game.connect.ws.onopen = function(){
-        console.log("open");
-        game.connect.ws.send('map');
-    }
 
-    game.connect.ws.onmessage = function(ev) {
-        // console.log("reciveved: " + ev.data);
-        //RPG.map = JSON.parse(ev.data);
-        game.quests = ev.data.split('\n');
-          
-        //game.quest = ev.data;
-        console.log("recieved data " + ev.data);
-    }
-    game.connect.ws.onclose = function(ev) {
-        console.log("close");
-    }
-    game.connect.ws.onerror = function(ev) {
-        console.log("error");
-    }
 };
 
 ProceduralGeneration.DungeonState.prototype.preload = function () {

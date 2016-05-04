@@ -72,7 +72,8 @@ ProceduralGeneration.Room.prototype.populate = function (population) {
             // pick a random number of prefabs
             number_of_prefabs = this.game_state.game.rnd.between(population.prefabs[prefab_type].number.min, population.prefabs[prefab_type].number.max);
             // create the prefabs
-            this.populate_prefabs(number_of_prefabs, population.prefabs[prefab_type].possible_prefabs);
+            //number_of_prefabs
+            this.populate_prefabs(game.difficulty , population.prefabs[prefab_type].possible_prefabs);
         }
     }
 };
@@ -94,6 +95,7 @@ ProceduralGeneration.Room.prototype.populate_tiles = function (number_of_tiles, 
         }
     }
 };
+
 
 ProceduralGeneration.Room.prototype.populate_prefabs = function (number_of_prefabs, possible_prefabs_data) {
     "use strict";
