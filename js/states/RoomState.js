@@ -11,6 +11,7 @@ ProceduralGeneration.RoomState = function () {
         "hero": ProceduralGeneration.Hero.prototype.constructor,
         "door": ProceduralGeneration.Door.prototype.constructor,
         "enemy": ProceduralGeneration.Enemy.prototype.constructor,
+        //"npc": ProceduralGeneration.NPC.prototype.constructor,
         "exit": ProceduralGeneration.Exit.prototype.constructor
     };
 };
@@ -45,6 +46,7 @@ ProceduralGeneration.RoomState.prototype.create = function () {
     var group_name, object_layer, collision_tiles, new_prefab;
     // create map
     this.map = this.game.add.tilemap(this.MAP_KEY);
+    console.log("name is " +this.map.tilesets[0].name);
     this.map.addTilesetImage(this.map.tilesets[0].name, this.MAP_TILESET);
     
     // create map layers
@@ -160,12 +162,12 @@ ProceduralGeneration.RoomState.prototype.create_quest_ui = function (text) {
     this.questUI.alpha = 0.5;
     var buttonLose = this.add.button(-200, 0,  'lose_image', function () {
         this.close_ui(this.questUI);
-        game.connect.ws.send("lose")
+        game.connect.ws.send("lose" + '\n' + game.quests[2])
     },this);
     var buttonWin = this.add.button(180, 0,  'win_image', function () {
         this.close_ui(this.questUI);
         //if (this.is_new_room) {
-            game.connect.ws.send('win');
+            game.connect.ws.send('win' + '\n' + game.quests[2]);
             this.is_new_room = false;
        // } else {
          //   window.alert("you are still in the same room");

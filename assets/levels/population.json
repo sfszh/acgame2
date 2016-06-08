@@ -11,9 +11,22 @@
         "enemies": {
             "number": {"min": 3, "max": 3},
             "possible_prefabs": [
+                
                 {
                     "prefab": "enemy",
                     "properties": {"texture": "enemy_image", "group": "enemies"}
+                },
+                {
+                    "prefab": "enemy",
+                    "properties": {"texture": "enemy_image2", "group": "enemies"}
+                },
+                {
+                    "prefab": "enemy",
+                    "properties": {"texture": "enemy_image3", "group": "enemies"}
+                },
+                {
+                    "prefab": "enemy",
+                    "properties": {"texture": "enemy_image4", "group": "enemies"}
                 }
             ]
         }

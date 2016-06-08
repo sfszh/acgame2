@@ -87167,6 +87167,11 @@ Phaser.Tileset.prototype = {
 
         if ((this.rows && this.rows !== rowCount) || (this.columns && this.columns !== colCount))
         {
+            var err = new Error();
+            //console.log("aaaa");
+            //console.log(this.rows);
+            //console.log(this.columns);
+            //console.log(err.stack);
             console.warn("Phaser.Tileset - actual and expected number of tile rows and columns differ");
         }
 

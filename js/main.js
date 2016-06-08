@@ -10,17 +10,22 @@ game.state.add("RoomState", new ProceduralGeneration.RoomState());
     game.connect.ws = new WebSocket('ws://192.168.10.233:8001/ws');
     game.connect.ws.onopen = function(){
         console.log("open");
-        game.connect.ws.send('map');
+        game.connect.ws.send('map\nfoo');
     }
     console.log("!!!!!!!");
     game.connect.ws.onmessage = function(ev) {
-        // console.log("reciveved: " + ev.data);
+        console.log("reciveved: " + ev.data);
         //RPG.map = JSON.parse(ev.data);
         game.quests = ev.data.split('\n');
+        console.log(game.quests[0]);
+        console.log(game.quests[1]);
+        game.quests[2] = game.quests[1];
+        /*
         if( game.quests[0] == game.quests[1]) {
             //game.connect.ws.send('win');
         }
-        console.log(" test " + game.quests[1].indexOf("normal"));
+        */
+        //console.log(" test " + game.quests[1].indexOf("normal"));
 
         if(game.quests[1].indexOf("easy") > 0) {
             

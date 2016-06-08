@@ -3,6 +3,9 @@
         "dungeon_tileset": {"type": "image", "source": "assets/images/terrains.png"},
         "hero_spritesheet": {"type": "spritesheet", "source": "assets/images/player.png", "frame_width": 31, "frame_height": 30},
         "enemy_image": {"type": "image", "source": "assets/images/demon.png"},
+        "enemy_image2": {"type": "image", "source": "assets/images/swordskeleton.png"},
+        "enemy_image3": {"type": "image", "source": "assets/images/snake.png"},
+        "enemy_image4": {"type": "image", "source": "assets/images/chest-gold.png"},
         "exit_image": {"type": "image", "source": "assets/images/portal.png"}
     },
     "groups": [
