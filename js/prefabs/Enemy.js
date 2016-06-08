@@ -8,6 +8,8 @@ ProceduralGeneration.Enemy = function (game_state, name, position, properties) {
 
     this.game_state.game.physics.arcade.enable(this);
     this.body.immovable = true;
+    //console.log("levl is " + properties.level);
+    this.level = properties.level;
 };
 
 ProceduralGeneration.Enemy.prototype = Object.create(ProceduralGeneration.Prefab.prototype);

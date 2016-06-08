@@ -13,13 +13,20 @@ game.state.add("RoomState", new ProceduralGeneration.RoomState());
         game.connect.ws.send('map\nfoo');
     }
     console.log("!!!!!!!");
+    function sleepFor( sleepDuration ){
+        var now = new Date().getTime();
+        while(new Date().getTime() < now + sleepDuration){ /* do nothing */ } 
+    }
+    sleepFor(500);
     game.connect.ws.onmessage = function(ev) {
         console.log("reciveved: " + ev.data);
         //RPG.map = JSON.parse(ev.data);
         game.quests = ev.data.split('\n');
         console.log(game.quests[0]);
         console.log(game.quests[1]);
-        game.quests[2] = game.quests[1];
+        game.current_step = game.quests[2];
+        game.level = game.quests[3];
+        game.room_explored = 0;
         /*
         if( game.quests[0] == game.quests[1]) {
             //game.connect.ws.send('win');

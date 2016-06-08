@@ -27,11 +27,14 @@ ProceduralGeneration.Door.prototype.enter_door = function () {
         // find the next room using the door direction
         next_room = this.game_state.room.neighbors[this.direction];
         // start room state for the next room
+        game.room_explored = game.room_explored + 1;
+        console.log("game.room_explored " + game.room_explored );
+        if(game.room_explored >= game.level) {
+            console.log("send win");
+            game.connect.ws.send("win\n>explore");
+        }
       game.state.start("DungeonState", true, false, 10);
-      if(game.quests[1] != null && game.quests[1] == "Just wander around and look") {
-        console.log("quests name " + game.quests[1]);
-        game.connect.ws.send('win');
-      }
+
       //  this.game_state.game.state.start("BootState", true, false, "assets/levels/room_level.json", "RoomState", {room: next_room});
     //}
 };

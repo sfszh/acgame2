@@ -14,19 +14,19 @@
                 
                 {
                     "prefab": "enemy",
-                    "properties": {"texture": "enemy_image", "group": "enemies"}
+                    "properties": {"texture": "enemy_image", "group": "enemies", "level": 1}
                 },
                 {
                     "prefab": "enemy",
-                    "properties": {"texture": "enemy_image2", "group": "enemies"}
+                    "properties": {"texture": "enemy_image2", "group": "enemies", "level":2}
                 },
                 {
                     "prefab": "enemy",
-                    "properties": {"texture": "enemy_image3", "group": "enemies"}
+                    "properties": {"texture": "enemy_image3", "group": "enemies", "level":3}
                 },
                 {
                     "prefab": "enemy",
-                    "properties": {"texture": "enemy_image4", "group": "enemies"}
+                    "properties": {"texture": "enemy_image4", "group": "enemies", "level":3, "chest": true }
                 }
             ]
         }

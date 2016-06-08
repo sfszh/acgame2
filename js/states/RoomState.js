@@ -102,9 +102,11 @@ ProceduralGeneration.RoomState.prototype.close_ui = function (ui) {
 };
 
 ProceduralGeneration.RoomState.prototype.open_battle_ui = function (enemy) {
-    console.log("open")
+    //console.log("open")
     this.enemy = enemy;
     this.popup.cameraOffset.x = 300;
+    //console.log(enemy.level);
+    this.battleInfo.setText("level " + enemy.level + " monster");
 };
 
 ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
@@ -124,19 +126,29 @@ ProceduralGeneration.RoomState.prototype.create_battle_ui = function () {
         
     },this);
     this.buttonWin = this.add.button(180, 0,  'win_image', function () {
-        console.log("win");
+        console.log("win " + this.enemy.level + " " + game.level);
         this.enemy.kill();
-        if (this.groups.enemies.countLiving() === 0) {
-            game.connect.ws.send("win");
+        //if (this.groups.enemies.countLiving() === 0) {
+        if(this.enemy.level == game.level){//} && game.current_step === '>kill') {
+            console.log("send win");
+            game.connect.ws.send("win\n>kill" );
+        } else {
+            console.log("dont send anything" + game.level + game.current_step);
         }
         //this.popup.cameraOffset.x = 1200;
         this.close_ui(this.popup);
     },this);
+    var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+
+    //  The Text is positioned at 0, 100
+    this.battleInfo = game.add.text(0,-100, "haha", style);
+    //this.questsInfo = game.add.text(0,-100, this.enemy.properties.level, style);
     popup.addChild(this.buttonLose);
     popup.addChild(this.buttonWin);
     this.buttonLose.bringToTop();
     this.buttonWin.bringToTop();
     this.close_ui(this.popup);
+    popup.addChild(this.battleInfo);
     //this.popup.cameraOffset.x +=1200;
 };
 
